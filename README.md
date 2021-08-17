@@ -39,8 +39,7 @@ Adding on to the previous limitation regarding training data, some abbreviations
 
 # How it works
 As a visual learner, I made a diagram to demonstrate the workflow of the program. 
-![alt text](https://github.com/graceCXY/iso4-abbrev-expander/blob/master/workflow_diagram.png?raw=true)
-
+![alt text](https://github.com/graceCXY/iso4-abbrev-expander/blob/master/deabbreviate/workflow_diagram.png)
 
 
 
