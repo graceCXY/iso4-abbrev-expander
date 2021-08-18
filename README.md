@@ -9,9 +9,20 @@ This project is a still a working progress. Feel free to contact if you have any
 
 # Installation
 ## Manual
+Downloading Repository
 ```bash
   $ git clone https://github.com/graceCXY/iso4-abbrev-expander.git
 ```
+Setting up the environment
+```bash
+  $ python3 -m venv abbrev-env
+  $ source abbrev-env/bin/activate
+```
+Getting all the dependencies from requirements.txt
+```bash
+  $ pip install -r requirements.txt
+```
+
 # Usage
 ## Abbreviate
 `abbreviate <FullName>`
@@ -41,6 +52,11 @@ Adding on to the previous limitation regarding training data, some abbreviations
 As a visual learner, I made a diagram to demonstrate the workflow of the program. 
 ![alt text](https://github.com/graceCXY/iso4-abbrev-expander/blob/master/deabbreviate/workflow_diagram.png)
 
+Language detection: Given a abbreviated journal name, we try to determine its language if none was given. Due to the library used, the output of language detection would be a 2 character code.
+
+Tokenization: We then tokenize the entire journal name to a list of abbreviated words. 
+
+For each of the words
 
 
 # Challenges and Future Research

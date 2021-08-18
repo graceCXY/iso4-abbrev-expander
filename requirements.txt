@@ -1,7 +1,5 @@
 numpy
 pandas
-re
-ast
 requests
 textblob
 nltk
