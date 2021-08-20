@@ -31,14 +31,36 @@ $ python deabbreviate/__main__.py abbreviate "Journal of Earthquake Engineering"
 "J. Earthq. Eng."
 ```
 ## Expand
+Main functionality of this program. 
 `expand <AbbrevName>`
 ```bash
 $ python deabbreviate/__main__.py expand "J. Earthq. Eng."
 "Journal of Earthquake Engineering"
 ```
+## Retrain the data
+As a user, you can make edits to train.csv by manually editing out errors or using an abbreviation program to create abbreviations such that it is a mapping of a full journal name to its abbreviated ones. It retrains the frequency models of different mappings as well as the bigrams that we use. 
+
+`retrain`
+```bash
+$ python deabbreviate/__main__.py retrain
+"Bigram models saved."
+"Frequency Models Saved"
+```
+
+## Testing
+The test takes a random sample of 20 full journal names, abbreviate them, and expand abbreviations to match original full names, also generating a fuzzy matching score for general evaluation. Currently, it is set up such that user can go into the script to change the sample size. Print test prints a log and csvtest outputs a csv.
+`printtest`
+```bash 
+$ python deabbreviate/__main__.py printtest
+```
+`csvtest`
+```bash 
+$ python deabbreviate/__main__.py csvtest
+```
+
 # Limitations 
 ## Input Data Format 
-The input data expansion must be in the format such that there is a "." behind every abbreviated word as per ISO4 standards. For instance, "J Earthq Eng" 
+The input data expansion must be in the format such that there is a "." behind every abbreviated word as per ISO4 standards. For instance, "J Earthq Eng" would not yield meaningful result.
 
 ## Training Data
 Since this model it built on probabilities and frequencies, it highly relies on the training data it receives and is also limited by common mistakes and tendencies of the training data. Currently, I use the csv files listed here https://github.com/JabRef/abbrv.jabref.org/tree/master/journals.
@@ -51,12 +73,6 @@ Adding on to the previous limitation regarding training data, some abbreviations
 # How it works
 As a visual learner, I made a diagram to demonstrate the workflow of the program. 
 ![alt text](https://github.com/graceCXY/iso4-abbrev-expander/blob/master/deabbreviate/workflow_diagram.png)
-
-Language detection: Given a abbreviated journal name, we try to determine its language if none was given. Due to the library used, the output of language detection would be a 2 character code.
-
-Tokenization: We then tokenize the entire journal name to a list of abbreviated words. 
-
-For each of the words
 
 
 # Challenges and Future Research

@@ -1,9 +1,8 @@
 # import numpy as np
 # import pandas as pd
 import re
-import ast
+# import ast 
 import requests
-
 from textblob import TextBlob
 import nltk
 nltk.download('wordnet')
@@ -313,30 +312,32 @@ def filter_stopwords_in_dict(d):
 
 
 def ngram_predict(model, word, stopwords = False, abbrev = ""):
-    word_pred_d = dict(model[word])
-    if stopwords:
-        word_pred_d = filter_non_stopwords_in_dict(word_pred_d)
-    else:
-        word_pred_d = filter_stopwords_in_dict(word_pred_d)
+    if word in model.keys():
+        word_pred_d = dict(model[word])
+        if stopwords:
+            word_pred_d = filter_non_stopwords_in_dict(word_pred_d)
+        else:
+            word_pred_d = filter_stopwords_in_dict(word_pred_d)
         
-    result = {}
-    if abbrev == "":
-        max_prob_word = get_max_prob_word_in_dict(word_pred_d)
-        if max_prob_word and word_pred_d[max_prob_word]:
-            result[max_prob_word] = word_pred_d[max_prob_word]
-    else:    
-        ## make sure we are only choosing from words with appropriate stem 
-        if word_pred_d:
-            temp = {}
-            for w in word_pred_d.keys():
-                if w and abbrev.split(".")[0] in w:
-                    temp[w] = word_pred_d[w]
-                
-            max_prob_word = get_max_prob_word_in_dict(temp)
+        result = {}
+        if abbrev == "":
+            max_prob_word = get_max_prob_word_in_dict(word_pred_d)
             if max_prob_word and word_pred_d[max_prob_word]:
                 result[max_prob_word] = word_pred_d[max_prob_word]
-                
-    return result
+        else:    
+            ## make sure we are only choosing from words with appropriate stem 
+            if word_pred_d:
+                temp = {}
+                for w in word_pred_d.keys():
+                    if w and abbrev.split(".")[0] in w:
+                        temp[w] = word_pred_d[w]
+                    
+                max_prob_word = get_max_prob_word_in_dict(temp)
+                if max_prob_word and word_pred_d[max_prob_word]:
+                    result[max_prob_word] = word_pred_d[max_prob_word]
+                    
+        return result
+    return {}
 
 
 def bigram_stopword_recovery(word_lst, m_forward, m_backward):
@@ -520,4 +521,5 @@ def expand_abbreviation(journal_abbrev, verbose = False, lang = ""):
 
 
 
-# deabbreviate("J. Earthq. Eng.", verbose = True)
+# expand_abbreviation("proc. natl. acad. sci. u. s. a.", verbose = True) 
+# expand_abbreviation("bot. j. linn. soc.", True)

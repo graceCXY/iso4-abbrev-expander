@@ -1,5 +1,5 @@
 .cache
-.coverage
-*.egg-info
-build
-dist
+# .coverage
+# *.egg-info
+# build
+# dist
